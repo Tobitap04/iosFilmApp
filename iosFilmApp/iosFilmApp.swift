@@ -1,8 +1,12 @@
-//
-//  iosFilmApp.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 22.11.24.
-//
+import SwiftUI
 
-import Foundation
+@main
+struct iosFilmApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    var body: some Scene {
+        WindowGroup {
+            MovieListView()
+        }
+    }
+}

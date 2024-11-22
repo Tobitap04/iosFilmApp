@@ -1,8 +1,15 @@
-//
-//  FavoriteMoviesView.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 22.11.24.
-//
+import SwiftUI
 
-import Foundation
+struct FavoriteMoviesView: View {
+    @FetchRequest(entity: MovieComment.entity(), sortDescriptors: [])
+    private var favorites: FetchedResults<MovieComment>
+    
+    var body: some View {
+        List {
+            ForEach(favorites, id: \.self) { favorite in
+                Text(favorite.text ?? "No comment")
+            }
+        }
+        .navigationTitle("Favorites")
+    }
+}
