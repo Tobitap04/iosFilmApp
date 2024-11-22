@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CC9C40932CF0E4050053CEA6 /* iosFilmApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CC9C40912CF0E4050053CEA6 /* iosFilmApp.xcdatamodeld */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CCFB71FC2CE74EBA00227CD0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC9C40922CF0E4050053CEA6 /* iosFilmApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iosFilmApp.xcdatamodel; sourceTree = "<group>"; };
 		CCFB71EB2CE74EB800227CD0 /* iosFilmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosFilmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFB71FB2CE74EBA00227CD0 /* iosFilmAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFB72052CE74EBA00227CD0 /* iosFilmAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,6 +80,7 @@
 		CCFB71E22CE74EB800227CD0 = {
 			isa = PBXGroup;
 			children = (
+				CC9C40912CF0E4050053CEA6 /* iosFilmApp.xcdatamodeld */,
 				CCFB71ED2CE74EB800227CD0 /* iosFilmApp */,
 				CCFB71FE2CE74EBA00227CD0 /* iosFilmAppTests */,
 				CCFB72082CE74EBA00227CD0 /* iosFilmAppUITests */,
@@ -175,6 +181,7 @@
 				TargetAttributes = {
 					CCFB71EA2CE74EB800227CD0 = {
 						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
 					};
 					CCFB71FA2CE74EBA00227CD0 = {
 						CreatedOnToolsVersion = 16.1;
@@ -182,6 +189,7 @@
 					};
 					CCFB72042CE74EBA00227CD0 = {
 						CreatedOnToolsVersion = 16.1;
+						LastSwiftMigration = 1610;
 						TestTargetID = CCFB71EA2CE74EB800227CD0;
 					};
 				};
@@ -236,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC9C40932CF0E4050053CEA6 /* iosFilmApp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +402,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosFilmApp/Preview Content\"";
@@ -412,6 +422,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -422,6 +433,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"iosFilmApp/Preview Content\"";
@@ -487,6 +499,7 @@
 		CCFB72162CE74EBA00227CD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9V66L7YW36;
@@ -495,6 +508,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = iosFilmApp;
@@ -504,6 +518,7 @@
 		CCFB72172CE74EBA00227CD0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9V66L7YW36;
@@ -558,6 +573,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CC9C40912CF0E4050053CEA6 /* iosFilmApp.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CC9C40922CF0E4050053CEA6 /* iosFilmApp.xcdatamodel */,
+			);
+			currentVersion = CC9C40922CF0E4050053CEA6 /* iosFilmApp.xcdatamodel */;
+			path = iosFilmApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CCFB71E32CE74EB800227CD0 /* Project object */;
 }
