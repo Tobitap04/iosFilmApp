@@ -1,8 +1,58 @@
-//
-//  MoviesView.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 22.11.24.
-//
+import SwiftUI
 
-import Foundation
+struct MoviesView: View {
+    @State private var movies: [Movie] = []
+    @State private var isLoading = false
+    
+    var body: some View {
+        VStack {
+            Text("Aktuelle Filme")
+                .font(.title)
+                .foregroundColor(.white)
+                .padding(.top)
+            
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .padding()
+            }
+            
+            ScrollView {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
+                    ForEach(movies) { movie in
+                        VStack {
+                            AsyncImage(url: URL(string: movie.imageUrl)) { image in
+                                image.resizable()
+                                     .scaledToFit()
+                            } placeholder: {
+                                Color.gray
+                            }
+                            .frame(height: 150)
+                            .cornerRadius(8)
+                            
+                            Text(movie.title)
+                                .foregroundColor(.white)
+                                .font(.caption)
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+        .background(Color.black.ignoresSafeArea())
+        .onAppear {
+            loadMovies()
+        }
+    }
+    
+    // Diese Methode ruft die Filme ab
+    func loadMovies() {
+        isLoading = true
+        TMDBService().fetchMovies(endpoint: "now_playing") { movies in
+            DispatchQueue.main.async {
+                self.movies = movies
+                self.isLoading = false
+            }
+        }
+    }
+}

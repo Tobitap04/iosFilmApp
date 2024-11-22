@@ -1,8 +1,10 @@
-//
-//  iosFilmApp.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 22.11.24.
-//
+import SwiftUI
 
-import Foundation
+@main
+struct iosFilmApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+        }
+    }
+}
