@@ -1,81 +1,89 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State private var query: String = ""
+    @State private var searchText: String = ""
     @State private var searchResults: [Movie] = []
-    @State private var isSearching = false
+    @State private var isLoading = false
     
     var body: some View {
-        VStack {
-            // Überschrift
-            Text("Suche")
-                .font(.title)
-                .foregroundColor(.white)
-                .padding(.top)
-            
-            // Suchfeld
-            HStack {
-                Image(systemName: "magnifyingglass")
-                    .foregroundColor(.gray)
-                TextField("Titel, Schauspieler, Regisseur", text: $query, onCommit: searchMovies)
-                    .textFieldStyle(PlainTextFieldStyle())
-                    .foregroundColor(.black)
-                    .padding(10)
-                    .background(Color.white)
-                    .cornerRadius(8)
-            }
-            .padding()
-            
-            // Ergebnisse anzeigen
-            ScrollView {
-                VStack(alignment: .leading, spacing: 10) {
-                    ForEach(searchResults) { movie in
-                        HStack {
-                            // Film-Cover
-                            AsyncImage(url: URL(string: movie.imageUrl)) { image in
-                                image.resizable()
-                                     .scaledToFit()
-                            } placeholder: {
-                                Color.gray
+        NavigationStack {
+            VStack {
+                Text("Suche")
+                    .font(.title)
+                    .foregroundColor(.white)
+                    .padding(.top)
+                
+                // Suchfeld
+                HStack {
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                    TextField("Titel, Schauspieler, Regisseur", text: $searchText, onCommit: searchMovies)
+                        .foregroundColor(.black)
+                        .padding(8)
+                        .background(Color.white)
+                        .cornerRadius(8)
+                }
+                .padding(.horizontal)
+                
+                // Ladeindikator
+                if isLoading {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                        .padding()
+                }
+                
+                // Suchergebnisse
+                ScrollView {
+                    LazyVStack {
+                        ForEach(searchResults) { movie in
+                            NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                HStack {
+                                    AsyncImage(url: URL(string: movie.imageUrl)) { image in
+                                        image.resizable()
+                                             .scaledToFit()
+                                    } placeholder: {
+                                        Color.gray
+                                    }
+                                    .frame(width: 100, height: 150)
+                                    .cornerRadius(8)
+                                    
+                                    VStack(alignment: .leading, spacing: 8) {
+                                        Text(movie.title)
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                        Text(movie.releaseDate)
+                                            .foregroundColor(.gray)
+                                            .font(.subheadline)
+                                    }
+                                    Spacer()
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(.white)
+                                }
+                                .padding(.vertical, 8)
+                                .padding(.horizontal)
                             }
-                            .frame(width: 50, height: 75)
-                            .cornerRadius(8)
-                            
-                            // Titel und Erscheinungsdatum
-                            VStack(alignment: .leading) {
-                                Text(movie.title)
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                Text(movie.releaseDate)
-                                    .font(.subheadline)
-                                    .foregroundColor(.gray)
-                            }
-                            Spacer()
-                            
-                            // Pfeil für Navigation
-                            Image(systemName: "chevron.right")
-                                .foregroundColor(.gray)
-                        }
-                        .padding(.horizontal)
-                        .onTapGesture {
-                            // Navigiere zur Detailansicht
                         }
                     }
                 }
-                .padding()
             }
+            .background(Color.black.ignoresSafeArea())
         }
-        .background(Color.black.ignoresSafeArea())
     }
     
+    // Funktion für die Suche
     func searchMovies() {
-        guard !query.isEmpty else { return }
-        isSearching = true
-        TMDBService().searchMovies(query: query) { results in
+        guard !searchText.isEmpty else {
+            self.searchResults = []
+            return
+        }
+        
+        isLoading = true
+        TMDBService().fetchSearchResults(query: searchText) { movies in
             DispatchQueue.main.async {
-                self.searchResults = results
-                self.isSearching = false
+                self.searchResults = movies
+                self.isLoading = false
             }
         }
     }
+
 }

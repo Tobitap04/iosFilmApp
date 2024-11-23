@@ -1,52 +1,51 @@
 import SwiftUI
 
 struct FavoritesView: View {
-    @ObservedObject var favoritesManager = FavoritesManager()
+    @State private var favoriteMovies: [Movie] = []
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             VStack {
-                // Überschrift
                 Text("Favoriten")
                     .font(.title)
                     .foregroundColor(.white)
-                    .padding()
+                    .padding(.top)
                 
-                // Liste der Favoriten
-                if favoritesManager.favorites.isEmpty {
-                    Text("Keine Favoriten hinzugefügt.")
-                        .foregroundColor(.gray)
-                        .padding()
-                } else {
-                    ScrollView {
-                        LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
-                            ForEach(favoritesManager.favorites) { movie in
-                                Button(action: {
-                                    // Navigation zur Detailansicht
-                                }) {
-                                    VStack {
-                                        // Film-Cover
-                                        AsyncImage(url: URL(string: movie.imageUrl)) { image in
-                                            image.resizable()
-                                                 .scaledToFit()
-                                        } placeholder: {
-                                            Color.gray
-                                        }
-                                        .frame(height: 150)
-                                        
-                                        // Film-Titel
-                                        Text(movie.title)
-                                            .font(.caption)
-                                            .foregroundColor(.white)
-                                            .multilineTextAlignment(.center)
+                ScrollView {
+                    LazyVStack {
+                        ForEach(favoriteMovies) { movie in
+                            NavigationLink(destination: MovieDetailView(movie: movie)) {
+                                HStack {
+                                    AsyncImage(url: URL(string: movie.imageUrl)) { image in
+                                        image.resizable()
+                                             .scaledToFit()
+                                    } placeholder: {
+                                        Color.gray
                                     }
+                                    .frame(width: 100, height: 150)
+                                    .cornerRadius(8)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text(movie.title)
+                                            .foregroundColor(.white)
+                                            .font(.headline)
+                                        Text(movie.releaseDate)
+                                            .foregroundColor(.gray)
+                                            .font(.subheadline)
+                                    }
+                                    Spacer()
                                 }
+                                .padding(.vertical, 8)
+                                .padding(.horizontal)
                             }
                         }
                     }
                 }
             }
             .background(Color.black.ignoresSafeArea())
+            .onAppear {
+                favoriteMovies = FavoriteManager.shared.getFavorites()
+            }
         }
     }
 }
