@@ -1,24 +1,29 @@
-//
-//  ContentView.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 15.11.24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @State private var selectedTab = 0
 
-#Preview {
-    ContentView()
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            FilmListView(title: "Aktuelle Filme", movieType: .nowPlaying)
+                .tabItem {
+                    Label("Filme", systemImage: "film")
+                }
+                .tag(0)
+            
+            SearchView()
+                .tabItem {
+                    Label("Suche", systemImage: "magnifyingglass")
+                }
+                .tag(1)
+            
+            FavoritesView()
+                .tabItem {
+                    Label("Favoriten", systemImage: "star.fill")
+                }
+                .tag(2)
+        }
+        .accentColor(.white)
+        .background(Color.black)
+    }
 }
