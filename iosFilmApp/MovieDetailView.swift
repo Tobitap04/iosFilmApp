@@ -11,7 +11,7 @@ struct MovieDetailView: View {
 
     var body: some View {
         VStack {
-            // Favoriten- und Bewerten Buttons oben fest positioniert mit schwarzem Hintergrund
+            // Favoriten- und Bewertungs-Buttons
             HStack {
                 Button(action: toggleFavorite) {
                     Image(systemName: isFavorite ? "star.fill" : "star")
@@ -20,7 +20,6 @@ struct MovieDetailView: View {
                         .padding()
                 }
                 .accessibilityLabel(isFavorite ? "Aus Favoriten entfernen" : "Zu Favoriten hinzufügen")
-                .accessibilityHint("Markiert diesen Film als Favorit oder entfernt ihn aus der Favoritenliste.")
                 
                 Spacer()
                 
@@ -33,35 +32,32 @@ struct MovieDetailView: View {
                         .background(Color.black.opacity(0.8))
                         .cornerRadius(10)
                 }
-                .accessibilityLabel("Film bewerten")
-                .accessibilityHint("Ermöglicht es, eine Bewertung für diesen Film hinzuzufügen oder zu bearbeiten.")
             }
             .padding(.horizontal)
-            .background(Color.black)  // Setzt den Hintergrund der Buttons auf Schwarz
-            .zIndex(1)  // Sicherstellen, dass diese oben sind
+            .background(Color.black)
 
             // ScrollView für den restlichen Inhalt
             ScrollView {
                 VStack(spacing: 20) {
-                    // Filmcover - mittig und ohne weiße Linie, aber mit Scrollverhalten
+                    // Filmcover
                     AsyncImage(url: URL(string: movie.imageUrl)) { image in
                         image
                             .resizable()
-                            .scaledToFit() // Bild wird richtig skaliert
-                            .frame(width: 200) // Bildgröße verkleinern
+                            .scaledToFit()
+                            .frame(width: 200)
                             .cornerRadius(10)
                             .clipped()
-                            .padding(.top, 20) // Leichter Abstand nach oben
+                            .padding(.top, 20)
                             .padding(.horizontal)
                     } placeholder: {
                         Color.gray
-                            .frame(height: 200) // Platzhalterhöhe für das Bild
+                            .frame(height: 200)
                             .cornerRadius(10)
                             .padding(.top, 20)
                             .padding(.horizontal)
                     }
 
-                    // Titel und Erscheinungsdatum mittig anzeigen
+                    // Titel und Erscheinungsdatum
                     Text(movie.title)
                         .font(.largeTitle)
                         .bold()
@@ -79,10 +75,10 @@ struct MovieDetailView: View {
                         .padding(.top, 10)
                         .padding(.horizontal)
 
-                    // Trailer anzeigen, wenn vorhanden
-                    if let trailerUrlString = movie.getTrailerUrl(), let trailerUrl = URL(string: trailerUrlString) {
+                    // Trailer anzeigen
+                    if let trailerUrlString = movie.trailerUrl, let trailerUrl = URL(string: trailerUrlString) {
                         Button(action: {
-                            showTrailer.toggle() // Trailer abspielen
+                            showTrailer.toggle()
                         }) {
                             Text("Trailer ansehen")
                                 .foregroundColor(.blue)
@@ -97,11 +93,14 @@ struct MovieDetailView: View {
                                 .cornerRadius(10)
                                 .padding(.horizontal)
                         }
+                    } else {
+                        Text("Kein Trailer verfügbar")
+                            .foregroundColor(.gray)
                     }
 
                     // Zurück-Button
                     Button(action: {
-                        presentationMode.wrappedValue.dismiss()  // Zurück-Navigation
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Zurück")
                             .foregroundColor(.white)
@@ -111,13 +110,13 @@ struct MovieDetailView: View {
                             .cornerRadius(10)
                     }
                     .padding(.horizontal)
-                    .padding(.bottom, 20)  // Etwas Abstand nach dem Zurück-Button
+                    .padding(.bottom, 20)
                 }
                 .padding(.horizontal)
             }
-            .background(Color.black)  // Hintergrund des ScrollView auf Schwarz setzen
+            .background(Color.black)
         }
-        .background(Color.black) // Der gesamte Hintergrund soll schwarz sein
+        .background(Color.black)
         .onAppear {
             isFavorite = FavoriteManager.shared.isFavorite(movie: movie)
             userReview = ReviewManager.shared.getReview(for: movie) ?? ""

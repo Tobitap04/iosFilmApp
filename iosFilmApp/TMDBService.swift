@@ -21,31 +21,36 @@ class TMDBService {
         }.resume()
     }
 
-
     func fetchTrailer(for movieId: Int, completion: @escaping (String?) -> Void) {
-        let urlString = "\(baseUrl)/movie/\(movieId)/videos?api_key=\(apiKey)"
-        
+        let urlString = "\(baseUrl)/movie/\(movieId)/videos?api_key=\(apiKey)&language=de-DE"
+
         guard let url = URL(string: urlString) else {
             completion(nil)
             return
         }
-        
+
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 print("Fehler beim Abrufen des Trailers: \(error.localizedDescription)")
                 completion(nil)
                 return
             }
-            
+
             guard let data = data else {
                 completion(nil)
                 return
             }
-            
+
             do {
                 let response = try JSONDecoder().decode(TrailerResponse.self, from: data)
-                let trailer = response.results.first
-                completion(trailer?.key) // trailer?.key ist die Trailer-ID, die in eine URL übersetzt werden muss
+                
+                // Filter nach Trailer, bevorzugt von YouTube
+                if let trailer = response.results.first(where: { $0.type == "Trailer" && $0.site == "YouTube" }) {
+                    completion("https://www.youtube.com/watch?v=\(trailer.key)")
+                } else {
+                    print("Kein passender Trailer gefunden.")
+                    completion(nil)
+                }
             } catch {
                 print("Fehler beim Dekodieren der Trailer-Daten: \(error.localizedDescription)")
                 completion(nil)
@@ -53,15 +58,6 @@ class TMDBService {
         }.resume()
     }
 
-    struct TrailerResponse: Codable {
-        let results: [Trailer]
-    }
-
-    struct Trailer: Codable {
-        let key: String
-    }
-
-    
     func searchMovies(query: String, completion: @escaping ([Movie]) -> Void) {
         guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
               let url = URL(string: "\(baseUrl)/search/movie?api_key=\(apiKey)&language=de-DE&query=\(encodedQuery)") else { return }
@@ -81,40 +77,53 @@ class TMDBService {
     }
     
     func fetchSearchResults(query: String, completion: @escaping ([Movie]) -> Void) {
-        guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            print("Fehler beim Kodieren des Suchbegriffs")
-            completion([])
-            return
-        }
-        
-        let urlString = "\(baseUrl)/search/movie?api_key=\(apiKey)&language=de-DE&query=\(encodedQuery)"
-        guard let url = URL(string: urlString) else {
-            print("Ungültige URL: \(urlString)")
-            completion([])
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data = data, error == nil else {
-                print("Fehler beim Abrufen von Suchergebnissen: \(String(describing: error))")
-                completion([])
-                return
-            }
-            
-            do {
-                let response = try JSONDecoder().decode(MovieResponse.self, from: data)
-                completion(response.results)
-            } catch {
-                print("Fehler beim Dekodieren von Suchergebnissen: \(error)")
-                completion([])
-            }
-        }.resume()
-    }
+           guard let encodedQuery = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+               print("Fehler beim Kodieren des Suchbegriffs")
+               completion([])
+               return
+           }
+           
+           let urlString = "\(baseUrl)/search/movie?api_key=\(apiKey)&language=de-DE&query=\(encodedQuery)"
+           guard let url = URL(string: urlString) else {
+               print("Ungültige URL: \(urlString)")
+               completion([])
+               return
+           }
+           
+           URLSession.shared.dataTask(with: url) { data, response, error in
+               guard let data = data, error == nil else {
+                   print("Fehler beim Abrufen von Suchergebnissen: \(String(describing: error))")
+                   completion([])
+                   return
+               }
+               
+               do {
+                   let response = try JSONDecoder().decode(MovieResponse.self, from: data)
+                   completion(response.results)
+               } catch {
+                   print("Fehler beim Dekodieren von Suchergebnissen: \(error)")
+                   completion([])
+               }
+           }.resume()
+       }
+
+   
 
 }
 
 struct MovieResponse: Decodable {
     let results: [Movie]
+}
+
+struct TrailerResponse: Codable {
+    let results: [Trailer]
+}
+
+struct Trailer: Codable {
+    let key: String
+    let site: String  // Plattform (z. B. YouTube)
+    let type: String  // Video-Typ (z. B. Trailer)
+    let iso_639_1: String? // Sprache des Videos
 }
 
 
