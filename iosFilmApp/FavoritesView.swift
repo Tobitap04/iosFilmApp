@@ -1,3 +1,11 @@
+//
+//  FavoritesView.swift
+//  iosFilmApp
+//
+//  Created by Tobias Tappe on 23.11.24.
+//
+
+
 import SwiftUI
 
 struct FavoritesView: View {

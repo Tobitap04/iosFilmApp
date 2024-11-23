@@ -10,7 +10,8 @@ struct FavoriteMovie: Codable, Identifiable {
     // Methode zum Hinzufügen eines Films zu den Favoriten
     static func addToFavorites(movie: Movie) {
         var favorites = loadFavorites()
-        let favoriteMovie = FavoriteMovie(id: movie.id, title: movie.title, posterPath: movie.posterPath, releaseDate: movie.releaseDate)
+        // Unwrappen des optionalen posterPath mit einem Standardwert (z.B. leerer String)
+        let favoriteMovie = FavoriteMovie(id: movie.id, title: movie.title, posterPath: movie.posterPath ?? "", releaseDate: movie.releaseDate)
         favorites.append(favoriteMovie)
         saveFavorites(favorites)
     }

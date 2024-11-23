@@ -1,72 +1,79 @@
 import SwiftUI
 
 struct MovieListView: View {
-    @State private var isCurrentMovies = true
     @State private var movies: [Movie] = []
+    @State private var isCurrentMovies: Bool
+    
+    init(isCurrentMovies: Bool) {
+        _isCurrentMovies = State(initialValue: isCurrentMovies)
+    }
     
     var body: some View {
         VStack {
             HStack {
                 Text(isCurrentMovies ? "Aktuelle Filme" : "Zukünftige Filme")
-                    .font(.title)
+                    .font(.largeTitle)
                     .foregroundColor(.white)
+                
                 Spacer()
-                Button(action: toggleMovies) {
-                    Image(systemName: "gear")
+                
+                Button(action: {
+                    isCurrentMovies.toggle() // Toggle zwischen aktuellen und zukünftigen Filmen
+                    fetchMovies()  // Bei Änderung der Auswahl werden Filme neu abgerufen
+                }) {
+                    Image(systemName: "gearshape")
                         .foregroundColor(.white)
                 }
             }
-            .padding(.horizontal)
+            .padding()
             
-            ScrollView {
-                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]) {
-                    ForEach(movies, id: \.id) { movie in
-                        MovieCard(movie: movie)
-                            .onTapGesture {
-                                // Navigiere zur Detailansicht
+            // Anzeige der Filme
+            if movies.isEmpty {
+                Text("Lade Filme...")
+                    .foregroundColor(.white)
+                    .padding()
+            } else {
+                ScrollView {
+                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 120))]) {
+                        ForEach(movies) { movie in
+                            VStack {
+                                if let url = movie.posterURL {
+                                    AsyncImage(url: url) { image in
+                                        image.resizable()
+                                             .scaledToFit()
+                                             .frame(width: 100, height: 150)
+                                             .cornerRadius(8)
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                }
+                                Text(movie.title)
+                                    .foregroundColor(.white)
+                                    .font(.caption)
+                                    .lineLimit(1)
                             }
+                            .padding()
+                            .background(Color.black)
+                            .cornerRadius(12)
+                            .onTapGesture {
+                                // Navigation zur Detailansicht des Films
+                            }
+                        }
                     }
                 }
-                .onAppear(perform: loadMovies)
+                .padding([.top, .horizontal])
             }
         }
-    }
-    
-    func toggleMovies() {
-        isCurrentMovies.toggle()
-        loadMovies()
-    }
-    
-    func loadMovies() {
-        // Hier wird die TMDB API aufgerufen, um aktuelle oder zukünftige Filme zu laden
-        TMDBAPI.fetchMovies(isCurrentMovies: isCurrentMovies) { movies in
-            self.movies = movies
+        .onAppear {
+            fetchMovies()  // Beim Erscheinen der View werden die Filme geladen
         }
     }
-}
-
-struct MovieCard: View {
-    var movie: Movie
     
-    var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath)")) { image in
-                image.resizable()
-                     .aspectRatio(contentMode: .fill)
-                     .frame(height: 150)
-                     .clipped()
-            } placeholder: {
-                Color.gray
-                    .frame(height: 150)
+    func fetchMovies() {
+        TMDBAPI.fetchMovies(isCurrentMovies: isCurrentMovies) { fetchedMovies in
+            DispatchQueue.main.async {
+                self.movies = fetchedMovies
             }
-            
-            Text(movie.title)
-                .foregroundColor(.white)
-                .font(.subheadline)
-                .padding(.top, 5)
         }
-        .background(Color.gray)
-        .cornerRadius(10)
-        .padding(5)
     }
 }
