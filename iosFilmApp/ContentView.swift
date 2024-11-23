@@ -1,24 +1,51 @@
-//
-//  ContentView.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 15.11.24.
-//
-
 import SwiftUI
 
 struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
+    @State private var selectedTab = 0
+    @StateObject var moviesViewModel = MoviesViewModel()
+    @StateObject var favoritesViewModel = FavoritesViewModel()
 
-#Preview {
-    ContentView()
+    var body: some View {
+        TabView(selection: $selectedTab) {
+            NavigationView {
+                MovieListView(viewModel: moviesViewModel, isFutureMovies: false) // Parameter ist jetzt korrekt.
+                    .background(Color.black) // Hintergrund für den Inhalt
+                    .foregroundColor(.white) // Textfarbe
+            }
+            .tabItem {
+                Image(systemName: "film")
+                Text("Filme")
+                    .foregroundColor(Color.white) // Hellerer Text für Tab
+            }
+            .tag(0)
+
+            NavigationView {
+                SearchView()
+                    .background(Color.black) // Hintergrund für den Inhalt
+                    .foregroundColor(.white) // Textfarbe
+            }
+            .tabItem {
+                Image(systemName: "magnifyingglass")
+                    .foregroundColor(Color.white) // Hellerer Text für Tab
+                Text("Suche")
+                    .foregroundColor(Color.white) // Hellerer Text für Tab
+            }
+            .tag(1)
+
+            NavigationView {
+                FavoritesView()
+                    .background(Color.black) // Hintergrund für den Inhalt
+                    .foregroundColor(.white) // Textfarbe
+            }
+            .tabItem {
+                Image(systemName: "star")
+                    .foregroundColor(Color.white) // Hellerer Text für Tab
+                Text("Favoriten")
+                    .foregroundColor(Color.white) // Hellerer Text für Tab
+            }
+            .tag(2)
+        }
+        .accentColor(.white) // Die Farbe für die Tab-Icons
+        .background(Color.black.edgesIgnoringSafeArea(.all)) // Hintergrund für den gesamten TabView
+    }
 }
