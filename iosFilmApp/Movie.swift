@@ -4,7 +4,7 @@ struct Movie: Identifiable, Decodable {
     var id: Int
     var title: String
     var overview: String
-    var releaseDate: String
+    var releaseDate: String?
     var posterPath: String?
     
     // Optional: Falls die JSON-Schlüssel von den Variablennamen abweichen
