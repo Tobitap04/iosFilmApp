@@ -3,6 +3,7 @@ import SafariServices
 
 struct DetailView: View {
     @Environment(\.dismiss) var dismiss
+    @ObservedObject var favoritesViewModel: FavoritesViewModel // Hier hinzufügen
     @State var isFavorited: Bool = false
     @State var showReviewPopup: Bool = false
     @State var userReview: String = ""
@@ -167,8 +168,18 @@ struct DetailView: View {
     }
 
     func toggleFavorite() {
+        // Favoritenstatus umschalten
         isFavorited.toggle()
+
+        // Speichern des Favoritenstatus in UserDefaults
         UserDefaults.standard.set(isFavorited, forKey: "\(movie.id)_favorited")
+        
+        // Wenn der Film favorisiert wurde, hinzufügen, andernfalls entfernen
+        if isFavorited {
+            favoritesViewModel.addFavorite(movie: movie)
+        } else {
+            favoritesViewModel.removeFavorite(movie: movie)
+        }
     }
 
     func loadFavoriteStatus() {

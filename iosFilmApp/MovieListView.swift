@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MovieListView: View {
     @ObservedObject var viewModel: MoviesViewModel
+    @ObservedObject var favoritesViewModel: FavoritesViewModel  // Füge das ViewModel hier hinzu
     var isFutureMovies: Bool
 
     var body: some View {
@@ -34,7 +35,7 @@ struct MovieListView: View {
                     GridItem(.flexible(), spacing: 10)
                 ], spacing: 20) {
                     ForEach(viewModel.movies) { movie in
-                        NavigationLink(destination: DetailView(movie: movie)) {
+                        NavigationLink(destination: DetailView(favoritesViewModel: favoritesViewModel, movie: movie)) { // favoritesViewModel hier übergeben
                             MovieCardView(movie: movie)
                         }
                     }

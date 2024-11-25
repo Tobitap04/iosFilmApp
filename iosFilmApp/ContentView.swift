@@ -8,7 +8,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             NavigationView {
-                MovieListView(viewModel: moviesViewModel, isFutureMovies: false) // Parameter ist jetzt korrekt.
+                MovieListView(viewModel: moviesViewModel, favoritesViewModel: favoritesViewModel, isFutureMovies: false) // favoritesViewModel wird hier übergeben
                     .background(Color.black) // Hintergrund für den Inhalt
                     .foregroundColor(.white) // Textfarbe
             }
@@ -20,7 +20,7 @@ struct ContentView: View {
             .tag(0)
 
             NavigationView {
-                SearchView()
+                SearchView(favoritesViewModel: favoritesViewModel) // favoritesViewModel wird hier übergeben
                     .background(Color.black) // Hintergrund für den Inhalt
                     .foregroundColor(.white) // Textfarbe
             }

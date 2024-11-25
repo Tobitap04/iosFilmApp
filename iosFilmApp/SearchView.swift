@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject var searchViewModel = SearchViewModel()
+    @ObservedObject var favoritesViewModel: FavoritesViewModel // favoritesViewModel als @ObservedObject
     @FocusState private var isTextFieldFocused: Bool // Fokussierung des TextFields
 
     var body: some View {
@@ -26,7 +27,7 @@ struct SearchView: View {
 
             // Liste der Suchergebnisse
             List(searchViewModel.searchResults, id: \.id) { movie in
-                NavigationLink(destination: DetailView(movie: movie)) { // NavigationLink für Klickbarkeit
+                NavigationLink(destination: DetailView(favoritesViewModel: favoritesViewModel, movie: movie)) { // NavigationLink für Klickbarkeit
                     HStack {
                         if let url = movie.fullPosterPath, let posterURL = URL(string: url) {
                             AsyncImage(url: posterURL) { image in
