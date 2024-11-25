@@ -35,7 +35,7 @@ struct ReviewView: View {
         }
     }
     
-    private func saveReview() {
+    func saveReview() {
         UserDefaults.standard.set(review, forKey: "\(movieID)-review")
     }
 }

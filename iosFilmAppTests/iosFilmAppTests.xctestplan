@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "73706EE4-EE83-404B-9752-E919FA46215A",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:iosFilmApp.xcodeproj",
+        "identifier" : "CC5688AD2CF502AA00EAA900",
+        "name" : "iosFilmAppTests"
+      }
+    }
+  ],
+  "version" : 1
+}
