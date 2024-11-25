@@ -1,11 +1,3 @@
-//
-//  FavoritesView.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 23.11.24.
-//
-
-
 import SwiftUI
 
 struct FavoritesView: View {
@@ -30,7 +22,21 @@ struct FavoritesView: View {
                             ForEach(favoriteMoviesManager.favoriteMovies) { movie in
                                 NavigationHelper.navigateToDetail(
                                     movie: movie,
-                                    from: MovieCardView(movie: movie)
+                                    from: VStack {
+                                        AsyncImage(url: URL(string: movie.posterPath)) { image in
+                                            image.resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .cornerRadius(12) // Abrundung der Ecken
+                                        } placeholder: {
+                                            ProgressView()
+                                        }
+                                        .frame(height: 150)
+                                        
+                                        Text(movie.title)
+                                            .foregroundColor(.white)
+                                            .font(.caption)
+                                            .lineLimit(1)
+                                    }
                                 )
                             }
                         }

@@ -1,3 +1,10 @@
+//
+//  MovieDetailView.swift
+//  iosFilmApp
+//
+//  Created by Tobias Tappe on 25.11.24.
+//
+
 import SwiftUI
 import AVKit
 
@@ -9,58 +16,69 @@ struct MovieDetailView: View {
     @StateObject private var favoriteMoviesManager = FavoriteMoviesManager()
     
     var body: some View {
-        ScrollView {
-            VStack(alignment: .leading) {
-                HStack {
-                    Button(action: toggleFavorite) {
-                        Image(systemName: isFavorite ? "heart.fill" : "heart")
-                            .foregroundColor(.red)
-                            .font(.title)
+        VStack {
+            ScrollView {
+                VStack(alignment: .leading) {
+                    // Poster-Bild
+                    AsyncImage(url: URL(string: movie.posterPath)) { image in
+                        image.resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity, maxHeight: 300)
+                            .background(Color.black)
+                    } placeholder: {
+                        ProgressView()
                     }
                     
-                    Spacer()
+                    // Filmtitel
+                    Text(movie.title)
+                        .font(.title)
+                        .foregroundColor(.white)
+                        .padding([.top, .bottom], 8)
                     
-                    Button("Bewerten") {
-                        isReviewing.toggle()
-                    }
-                    .foregroundColor(.blue)
-                }
-                .padding()
-                
-                AsyncImage(url: URL(string: movie.posterPath)) { image in
-                    image.resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: .infinity, maxHeight: 300)
-                        .background(Color.black)
-                } placeholder: {
-                    ProgressView()
-                }
-                
-                Text(movie.title)
-                    .font(.title)
-                    .foregroundColor(.white)
-                    .padding([.top, .bottom], 8)
-                
-                Text("Erscheinungsdatum: \(movie.releaseDate)")
-                    .foregroundColor(.gray)
-                
-                Text(movie.overview)
-                    .foregroundColor(.white)
-                    .padding(.top)
-                
-                if let trailerURL = movie.trailerURL {
-                    Text("Trailer")
-                        .font(.headline)
+                    // Erscheinungsdatum
+                    Text("Erscheinungsdatum: \(formatDate(movie.releaseDate))")
+                        .foregroundColor(.gray)
+                    
+                    // Filmübersicht
+                    Text(movie.overview)
                         .foregroundColor(.white)
                         .padding(.top)
                     
-                    VideoPlayer(player: AVPlayer(url: trailerURL))
-                        .frame(height: 200)
-                        .cornerRadius(10)
+                    // Bewertungsbutton (zentriert)
+                    HStack {
+                        Spacer() // Zwingt den Button in die Mitte
+                        Button("Bewerten") {
+                            isReviewing.toggle()
+                        }
+                        .foregroundColor(.blue)
+                        .padding(.vertical)
+                        Spacer() // Zwingt den Button in die Mitte
+                    }
+                    
+                    // Trailer anzeigen (falls verfügbar)
+                    if let trailerURL = movie.trailerURL {
+                        Text("Trailer")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding(.top)
+                        
+                        VideoPlayer(player: AVPlayer(url: trailerURL))
+                            .frame(height: 200)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding()
+            }
+        }
+        .background(Color.black.ignoresSafeArea()) // Hintergrund komplett schwarz
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                // Favoriten-Button oben rechts fixiert
+                Button(action: toggleFavorite) {
+                    Image(systemName: isFavorite ? "star.fill" : "star")
+                        .foregroundColor(isFavorite ? .yellow : .white) // Gelb für Favoriten, sonst weiß
                 }
             }
-            .padding()
-            .background(Color.black.ignoresSafeArea())
         }
         .sheet(isPresented: $isReviewing) {
             ReviewView(review: $userReview, movieID: movie.id)
@@ -86,5 +104,16 @@ struct MovieDetailView: View {
     
     private func loadUserReview() {
         userReview = UserDefaults.standard.string(forKey: "\(movie.id)-review") ?? ""
+    }
+
+    private func formatDate(_ date: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        if let dateObj = formatter.date(from: date) {
+            formatter.locale = Locale(identifier: "de_DE")
+            formatter.dateStyle = .long
+            return formatter.string(from: dateObj)
+        }
+        return date
     }
 }

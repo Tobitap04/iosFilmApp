@@ -5,7 +5,6 @@
 //  Created by Tobias Tappe on 23.11.24.
 //
 
-
 import SwiftUI
 
 struct MovieCardView: View {
@@ -14,8 +13,10 @@ struct MovieCardView: View {
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: movie.posterPath)) { image in
-                image.resizable()
+                image
+                    .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10) // Abgerundete Ecken
             } placeholder: {
                 ProgressView()
             }

@@ -1,11 +1,3 @@
-//
-//  ContentView.swift
-//  iosFilmApp
-//
-//  Created by Tobias Tappe on 23.11.24.
-//
-
-
 import SwiftUI
 
 struct ContentView: View {
@@ -23,10 +15,10 @@ struct ContentView: View {
             
             FavoritesView()
                 .tabItem {
-                    Label("Favoriten", systemImage: "heart")
+                    Label("Favoriten", systemImage: "star.fill") // Geändertes Icon
                 }
         }
-        .accentColor(.white)
+        .accentColor(.white) // Farbe für aktives Tab geändert
         .background(Color.black)
         .onAppear {
             UITabBar.appearance().backgroundColor = UIColor(white: 0.1, alpha: 0.8)

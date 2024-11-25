@@ -29,9 +29,33 @@
 		CCFB72052CE74EBA00227CD0 /* iosFilmAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		CC1673E02CF494E9007A0A8F /* Exceptions for "iosFilmApp" folder in "iosFilmApp" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				.swift,
+			);
+			target = CCFB71EA2CE74EB800227CD0 /* iosFilmApp */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		CC1673E12CF494E9007A0A8F /* Exceptions for "iosFilmApp" folder in "Compile Sources" phase from "iosFilmApp" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = CCFB71E72CE74EB800227CD0 /* Sources */;
+			membershipExceptions = (
+				.swift,
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CCFB71ED2CE74EB800227CD0 /* iosFilmApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				CC1673E02CF494E9007A0A8F /* Exceptions for "iosFilmApp" folder in "iosFilmApp" target */,
+				CC1673E12CF494E9007A0A8F /* Exceptions for "iosFilmApp" folder in "Compile Sources" phase from "iosFilmApp" target */,
+			);
 			path = iosFilmApp;
 			sourceTree = "<group>";
 		};
