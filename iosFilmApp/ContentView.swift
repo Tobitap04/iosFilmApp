@@ -21,7 +21,7 @@ struct ContentView: View {
         .accentColor(.white) // Farbe für aktives Tab geändert
         .background(Color.black)
         .onAppear {
-            UITabBar.appearance().backgroundColor = UIColor(white: 0.1, alpha: 0.8)
+            UITabBar.appearance().backgroundColor = UIColor(white: 0.5, alpha: 0.7)
         }
     }
 }

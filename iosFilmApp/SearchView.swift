@@ -3,7 +3,7 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchQuery = ""
     @State private var searchResults: [Movie] = []
-    
+
     var body: some View {
         NavigationView {
             VStack {
@@ -12,26 +12,26 @@ struct SearchView: View {
                         Image(systemName: "magnifyingglass")
                             .foregroundColor(.gray)
                             .padding(.leading, 8)
-                        
+
                         TextField(
-                                                    "Titel, Schauspieler, Regisseur",
-                                                    text: $searchQuery
-                                                )
-                                                .foregroundColor(.white) // Eingabetextfarbe
-                                                .placeholder(when: searchQuery.isEmpty) { // Custom Placeholder Modifier
-                                                    Text("Titel, Schauspieler, Regisseur")
-                                                        .foregroundColor(.gray) // Hellgrau für bessere Sichtbarkeit
-                                                }
-                                                .onChange(of: searchQuery) { _ in
-                                                    performSearch() // Automatische Suche bei Texteingabe
-                                                }
-                                                .padding(.vertical, 10)
-                                            }
-                                            .background(Color.gray.opacity(0.2))
-                                            .cornerRadius(8)
-                                            .padding()
-                                        }
-                
+                            "Titel, Schauspieler, Regisseur",
+                            text: $searchQuery
+                        )
+                        .foregroundColor(.white) // Eingabetextfarbe
+                        .placeholder(when: searchQuery.isEmpty) { // Custom Placeholder Modifier
+                            Text("Titel, Schauspieler, Regisseur")
+                                .foregroundColor(.gray) // Hellgrau für bessere Sichtbarkeit
+                        }
+                        .onChange(of: searchQuery) { _ in
+                            performSearch() // Automatische Suche bei Texteingabe
+                        }
+                        .padding(.vertical, 10)
+                    }
+                    .background(Color.gray.opacity(0.2))
+                    .cornerRadius(8)
+                    .padding()
+                }
+
                 ScrollView {
                     ForEach(searchResults) { movie in
                         NavigationHelper.navigateToDetail(
@@ -44,11 +44,12 @@ struct SearchView: View {
                                 } placeholder: {
                                     ProgressView()
                                 }
-                                
+
                                 VStack(alignment: .leading) { // Links ausgerichtet
                                     Text(movie.title)
                                         .foregroundColor(.white)
                                         .bold()
+                                        .multilineTextAlignment(.leading) // Links ausgerichtet
                                     Text(formatDate(movie.releaseDate)) // Datum im deutschen Format
                                         .foregroundColor(.gray)
                                 }
@@ -67,13 +68,13 @@ struct SearchView: View {
             .navigationBarHidden(true)
         }
     }
-    
+
     private func performSearch() {
-        TMDBService.searchMovies(query: searchQuery) { results in
+        TMDBService.searchAll(query: searchQuery) { results in
             searchResults = results
         }
     }
-    
+
     private func formatDate(_ date: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"

@@ -13,59 +13,67 @@ struct MovieDetailView: View {
     @State private var userReview: String = ""
     @State private var isReviewing = false
     @State private var isFavorite = false // Lokale Favoritenstatus-Variable
+    @State private var trailerURL: URL? // Dynamische Trailer-URL
     @StateObject private var favoriteMoviesManager = FavoriteMoviesManager()
-    
+
     var body: some View {
         VStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    // Poster-Bild
+                    // Poster-Bild mit abgerundeten Ecken
                     AsyncImage(url: URL(string: movie.posterPath)) { image in
                         image.resizable()
                             .scaledToFit()
                             .frame(maxWidth: .infinity, maxHeight: 300)
+                            .cornerRadius(10) // Abgerundete Ecken
                             .background(Color.black)
                     } placeholder: {
                         ProgressView()
+                            .frame(maxWidth: .infinity, maxHeight: 300)
                     }
-                    
+
                     // Filmtitel
                     Text(movie.title)
                         .font(.title)
                         .foregroundColor(.white)
                         .padding([.top, .bottom], 8)
-                    
+
                     // Erscheinungsdatum
                     Text("Erscheinungsdatum: \(formatDate(movie.releaseDate))")
                         .foregroundColor(.gray)
-                    
+
                     // Filmübersicht
                     Text(movie.overview)
                         .foregroundColor(.white)
                         .padding(.top)
-                    
-                    // Bewertungsbutton (zentriert)
-                    HStack {
-                        Spacer() // Zwingt den Button in die Mitte
-                        Button("Bewerten") {
+
+                    // Bewertungs- und Trailer-Buttons
+                    HStack(spacing: 20) {
+                        Spacer()
+
+                        // Bewertungsbutton
+                        Button(action: {
                             isReviewing.toggle()
+                        }) {
+                            Label("Bewerten", systemImage: "pencil")
                         }
                         .foregroundColor(.blue)
-                        .padding(.vertical)
-                        Spacer() // Zwingt den Button in die Mitte
+
+                        // Trailer-Button
+                        Button(action: {
+                            if let trailerURL = trailerURL {
+                                UIApplication.shared.open(trailerURL) // Öffnet Safari mit der Trailer-URL
+                            } else {
+                                print("Trailer-URL nicht verfügbar.")
+                            }
+                        }) {
+                            Label("Trailer ansehen", systemImage: "play.rectangle")
+                        }
+                        .foregroundColor(.green)
+
+                        Spacer()
                     }
-                    
-                    // Trailer anzeigen (falls verfügbar)
-                    if let trailerURL = movie.trailerURL {
-                        Text("Trailer")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding(.top)
-                        
-                        VideoPlayer(player: AVPlayer(url: trailerURL))
-                            .frame(height: 200)
-                            .cornerRadius(10)
-                    }
+                    .padding(.top)
                 }
                 .padding()
             }
@@ -85,10 +93,19 @@ struct MovieDetailView: View {
         }
         .onAppear {
             loadUserReview()
-            syncFavoriteStatus() // Synchronisiert den Favoritenstatus
+            syncFavoriteStatus()
+            fetchTrailerURL() // Lädt die Trailer-URL
         }
     }
-    
+
+    private func fetchTrailerURL() {
+        TMDBService.fetchTrailer(for: movie.id) { url in
+            DispatchQueue.main.async {
+                trailerURL = url
+            }
+        }
+    }
+
     private func toggleFavorite() {
         if isFavorite {
             favoriteMoviesManager.removeFromFavorites(movie)
@@ -97,11 +114,11 @@ struct MovieDetailView: View {
         }
         isFavorite.toggle() // Aktualisiert den lokalen Favoritenstatus
     }
-    
+
     private func syncFavoriteStatus() {
         isFavorite = favoriteMoviesManager.isFavorite(movie)
     }
-    
+
     private func loadUserReview() {
         userReview = UserDefaults.standard.string(forKey: "\(movie.id)-review") ?? ""
     }
