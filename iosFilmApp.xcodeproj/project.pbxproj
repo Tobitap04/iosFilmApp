@@ -7,14 +7,7 @@
 	objects = {
 
 /* Begin PBXContainerItemProxy section */
-		CCFB71FC2CE74EBA00227CD0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CCFB71E32CE74EB800227CD0 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CCFB71EA2CE74EB800227CD0;
-			remoteInfo = iosFilmApp;
-		};
-		CCFB72062CE74EBA00227CD0 /* PBXContainerItemProxy */ = {
+		CC5688B22CF502AA00EAA900 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = CCFB71E32CE74EB800227CD0 /* Project object */;
 			proxyType = 1;
@@ -24,9 +17,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CC5688AE2CF502AA00EAA900 /* iosFilmAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCFB71EB2CE74EB800227CD0 /* iosFilmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosFilmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CCFB71FB2CE74EBA00227CD0 /* iosFilmAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CCFB72052CE74EBA00227CD0 /* iosFilmAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -50,6 +42,11 @@
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		CC5688AF2CF502AA00EAA900 /* iosFilmAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = iosFilmAppTests;
+			sourceTree = "<group>";
+		};
 		CCFB71ED2CE74EB800227CD0 /* iosFilmApp */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -59,34 +56,17 @@
 			path = iosFilmApp;
 			sourceTree = "<group>";
 		};
-		CCFB71FE2CE74EBA00227CD0 /* iosFilmAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = iosFilmAppTests;
-			sourceTree = "<group>";
-		};
-		CCFB72082CE74EBA00227CD0 /* iosFilmAppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = iosFilmAppUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CC5688AB2CF502AA00EAA900 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCFB71E82CE74EB800227CD0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CCFB71F82CE74EBA00227CD0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CCFB72022CE74EBA00227CD0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -100,8 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				CCFB71ED2CE74EB800227CD0 /* iosFilmApp */,
-				CCFB71FE2CE74EBA00227CD0 /* iosFilmAppTests */,
-				CCFB72082CE74EBA00227CD0 /* iosFilmAppUITests */,
+				CC5688AF2CF502AA00EAA900 /* iosFilmAppTests */,
 				CCFB71EC2CE74EB800227CD0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -110,8 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				CCFB71EB2CE74EB800227CD0 /* iosFilmApp.app */,
-				CCFB71FB2CE74EBA00227CD0 /* iosFilmAppTests.xctest */,
-				CCFB72052CE74EBA00227CD0 /* iosFilmAppUITests.xctest */,
+				CC5688AE2CF502AA00EAA900 /* iosFilmAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +97,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CC5688AD2CF502AA00EAA900 /* iosFilmAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CC5688B42CF502AA00EAA900 /* Build configuration list for PBXNativeTarget "iosFilmAppTests" */;
+			buildPhases = (
+				CC5688AA2CF502AA00EAA900 /* Sources */,
+				CC5688AB2CF502AA00EAA900 /* Frameworks */,
+				CC5688AC2CF502AA00EAA900 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CC5688B32CF502AA00EAA900 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CC5688AF2CF502AA00EAA900 /* iosFilmAppTests */,
+			);
+			name = iosFilmAppTests;
+			packageProductDependencies = (
+			);
+			productName = iosFilmAppTests;
+			productReference = CC5688AE2CF502AA00EAA900 /* iosFilmAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CCFB71EA2CE74EB800227CD0 /* iosFilmApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CCFB720F2CE74EBA00227CD0 /* Build configuration list for PBXNativeTarget "iosFilmApp" */;
@@ -141,52 +142,6 @@
 			productReference = CCFB71EB2CE74EB800227CD0 /* iosFilmApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CCFB71FA2CE74EBA00227CD0 /* iosFilmAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CCFB72122CE74EBA00227CD0 /* Build configuration list for PBXNativeTarget "iosFilmAppTests" */;
-			buildPhases = (
-				CCFB71F72CE74EBA00227CD0 /* Sources */,
-				CCFB71F82CE74EBA00227CD0 /* Frameworks */,
-				CCFB71F92CE74EBA00227CD0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CCFB71FD2CE74EBA00227CD0 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				CCFB71FE2CE74EBA00227CD0 /* iosFilmAppTests */,
-			);
-			name = iosFilmAppTests;
-			packageProductDependencies = (
-			);
-			productName = iosFilmAppTests;
-			productReference = CCFB71FB2CE74EBA00227CD0 /* iosFilmAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		CCFB72042CE74EBA00227CD0 /* iosFilmAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CCFB72152CE74EBA00227CD0 /* Build configuration list for PBXNativeTarget "iosFilmAppUITests" */;
-			buildPhases = (
-				CCFB72012CE74EBA00227CD0 /* Sources */,
-				CCFB72022CE74EBA00227CD0 /* Frameworks */,
-				CCFB72032CE74EBA00227CD0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CCFB72072CE74EBA00227CD0 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				CCFB72082CE74EBA00227CD0 /* iosFilmAppUITests */,
-			);
-			name = iosFilmAppUITests;
-			packageProductDependencies = (
-			);
-			productName = iosFilmAppUITests;
-			productReference = CCFB72052CE74EBA00227CD0 /* iosFilmAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -197,17 +152,13 @@
 				LastSwiftUpdateCheck = 1610;
 				LastUpgradeCheck = 1610;
 				TargetAttributes = {
+					CC5688AD2CF502AA00EAA900 = {
+						CreatedOnToolsVersion = 16.1;
+						TestTargetID = CCFB71EA2CE74EB800227CD0;
+					};
 					CCFB71EA2CE74EB800227CD0 = {
 						CreatedOnToolsVersion = 16.1;
 						LastSwiftMigration = 1610;
-					};
-					CCFB71FA2CE74EBA00227CD0 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = CCFB71EA2CE74EB800227CD0;
-					};
-					CCFB72042CE74EBA00227CD0 = {
-						CreatedOnToolsVersion = 16.1;
-						TestTargetID = CCFB71EA2CE74EB800227CD0;
 					};
 				};
 			};
@@ -226,28 +177,20 @@
 			projectRoot = "";
 			targets = (
 				CCFB71EA2CE74EB800227CD0 /* iosFilmApp */,
-				CCFB71FA2CE74EBA00227CD0 /* iosFilmAppTests */,
-				CCFB72042CE74EBA00227CD0 /* iosFilmAppUITests */,
+				CC5688AD2CF502AA00EAA900 /* iosFilmAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CC5688AC2CF502AA00EAA900 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCFB71E92CE74EB800227CD0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CCFB71F92CE74EBA00227CD0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CCFB72032CE74EBA00227CD0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -257,21 +200,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CC5688AA2CF502AA00EAA900 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CCFB71E72CE74EB800227CD0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CCFB71F72CE74EBA00227CD0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CCFB72012CE74EBA00227CD0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -281,19 +217,50 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		CCFB71FD2CE74EBA00227CD0 /* PBXTargetDependency */ = {
+		CC5688B32CF502AA00EAA900 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = CCFB71EA2CE74EB800227CD0 /* iosFilmApp */;
-			targetProxy = CCFB71FC2CE74EBA00227CD0 /* PBXContainerItemProxy */;
-		};
-		CCFB72072CE74EBA00227CD0 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CCFB71EA2CE74EB800227CD0 /* iosFilmApp */;
-			targetProxy = CCFB72062CE74EBA00227CD0 /* PBXContainerItemProxy */;
+			targetProxy = CC5688B22CF502AA00EAA900 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		CC5688B52CF502AA00EAA900 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9V66L7YW36;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iosFilmApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iosFilmApp";
+			};
+			name = Debug;
+		};
+		CC5688B62CF502AA00EAA900 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 9V66L7YW36;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iosFilmApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iosFilmApp";
+			};
+			name = Release;
+		};
 		CCFB720D2CE74EBA00227CD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -474,81 +441,18 @@
 			};
 			name = Release;
 		};
-		CCFB72132CE74EBA00227CD0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V66L7YW36;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iosFilmApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iosFilmApp";
-			};
-			name = Debug;
-		};
-		CCFB72142CE74EBA00227CD0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V66L7YW36;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/iosFilmApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iosFilmApp";
-			};
-			name = Release;
-		};
-		CCFB72162CE74EBA00227CD0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V66L7YW36;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = iosFilmApp;
-			};
-			name = Debug;
-		};
-		CCFB72172CE74EBA00227CD0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 9V66L7YW36;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ttappe.iosFilmAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = iosFilmApp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CC5688B42CF502AA00EAA900 /* Build configuration list for PBXNativeTarget "iosFilmAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CC5688B52CF502AA00EAA900 /* Debug */,
+				CC5688B62CF502AA00EAA900 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CCFB71E62CE74EB800227CD0 /* Build configuration list for PBXProject "iosFilmApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -563,24 +467,6 @@
 			buildConfigurations = (
 				CCFB72102CE74EBA00227CD0 /* Debug */,
 				CCFB72112CE74EBA00227CD0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CCFB72122CE74EBA00227CD0 /* Build configuration list for PBXNativeTarget "iosFilmAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CCFB72132CE74EBA00227CD0 /* Debug */,
-				CCFB72142CE74EBA00227CD0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CCFB72152CE74EBA00227CD0 /* Build configuration list for PBXNativeTarget "iosFilmAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CCFB72162CE74EBA00227CD0 /* Debug */,
-				CCFB72172CE74EBA00227CD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

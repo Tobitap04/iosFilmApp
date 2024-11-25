@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+
 struct ReviewView: View {
     @Binding var review: String
     let movieID: Int

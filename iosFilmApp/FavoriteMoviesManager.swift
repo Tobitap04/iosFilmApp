@@ -3,7 +3,7 @@ import Foundation
 class FavoriteMoviesManager: ObservableObject {
     @Published var favoriteMovies: [Movie] = []
     
-    private let storageKey = "favoriteMovies"
+    let storageKey = "favoriteMovies"
     
     init() {
         loadFavorites()
@@ -33,7 +33,7 @@ class FavoriteMoviesManager: ObservableObject {
         }
     }
     
-    private func saveFavorites() {
+    func saveFavorites() {
         if let encoded = try? JSONEncoder().encode(favoriteMovies) {
             UserDefaults.standard.set(encoded, forKey: storageKey)
         }

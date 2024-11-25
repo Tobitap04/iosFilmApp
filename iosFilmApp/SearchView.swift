@@ -1,8 +1,9 @@
 import SwiftUI
 
+
 struct SearchView: View {
-    @State private var searchQuery = ""
-    @State private var searchResults: [Movie] = []
+    @State var searchQuery = ""
+    @State var searchResults: [Movie] = []
 
     var body: some View {
         NavigationView {
@@ -69,13 +70,13 @@ struct SearchView: View {
         }
     }
 
-    private func performSearch() {
+    func performSearch() {
         TMDBService.searchAll(query: searchQuery) { results in
             searchResults = results
         }
     }
 
-    private func formatDate(_ date: String) -> String {
+    func formatDate(_ date: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         if let dateObj = formatter.date(from: date) {

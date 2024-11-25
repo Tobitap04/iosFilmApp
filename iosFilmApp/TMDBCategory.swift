@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 enum TMDBCategory {
     case nowPlaying
     case upcoming

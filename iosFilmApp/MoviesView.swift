@@ -8,9 +8,10 @@
 
 import SwiftUI
 
+
 struct MoviesView: View {
-    @State private var showingUpcomingMovies = false
-    @State private var movies: [Movie] = []
+    @State var showingUpcomingMovies = false
+    @State var movies: [Movie] = []
     
     var body: some View {
         NavigationView {
@@ -49,12 +50,12 @@ struct MoviesView: View {
         }
     }
     
-    private func toggleMovieCategory() {
+    func toggleMovieCategory() {
         showingUpcomingMovies.toggle()
         loadMovies()
     }
     
-    private func loadMovies() {
+    func loadMovies() {
         let category = showingUpcomingMovies ? TMDBCategory.upcoming : TMDBCategory.nowPlaying
         TMDBService.fetchMovies(category: category) { fetchedMovies in
             movies = fetchedMovies

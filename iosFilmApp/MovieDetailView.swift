@@ -8,13 +8,14 @@
 import SwiftUI
 import AVKit
 
+
 struct MovieDetailView: View {
     let movie: Movie
-    @State private var userReview: String = ""
-    @State private var isReviewing = false
-    @State private var isFavorite = false // Lokale Favoritenstatus-Variable
-    @State private var trailerURL: URL? // Dynamische Trailer-URL
-    @StateObject private var favoriteMoviesManager = FavoriteMoviesManager()
+    @State  var userReview: String = ""
+    @State  var isReviewing = false
+    @State  var isFavorite = false // Lokale Favoritenstatus-Variable
+    @State  var trailerURL: URL? // Dynamische Trailer-URL
+    @StateObject  var favoriteMoviesManager = FavoriteMoviesManager()
 
     var body: some View {
         VStack {
@@ -98,7 +99,7 @@ struct MovieDetailView: View {
         }
     }
 
-    private func fetchTrailerURL() {
+    func fetchTrailerURL() {
         TMDBService.fetchTrailer(for: movie.id) { url in
             DispatchQueue.main.async {
                 trailerURL = url
@@ -106,7 +107,7 @@ struct MovieDetailView: View {
         }
     }
 
-    private func toggleFavorite() {
+    func toggleFavorite() {
         if isFavorite {
             favoriteMoviesManager.removeFromFavorites(movie)
         } else {
@@ -115,15 +116,15 @@ struct MovieDetailView: View {
         isFavorite.toggle() // Aktualisiert den lokalen Favoritenstatus
     }
 
-    private func syncFavoriteStatus() {
+    func syncFavoriteStatus() {
         isFavorite = favoriteMoviesManager.isFavorite(movie)
     }
 
-    private func loadUserReview() {
+    func loadUserReview() {
         userReview = UserDefaults.standard.string(forKey: "\(movie.id)-review") ?? ""
     }
 
-    private func formatDate(_ date: String) -> String {
+    func formatDate(_ date: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         if let dateObj = formatter.date(from: date) {
