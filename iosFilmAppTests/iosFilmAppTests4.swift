@@ -78,3 +78,75 @@ final class ReviewAndMovieDetailViewTests: XCTestCase {
         XCTAssertNotNil(movieDetailView.movie.posterPath, "Das Poster sollte vorhanden sein.")
     }
 }
+
+
+class ReviewViewTests: XCTestCase {
+    
+    func testInitialReviewTextIsEmpty() {
+        let movieID = 1
+        let reviewBinding = Binding.constant("")
+        let view = ReviewView(review: reviewBinding, movieID: movieID)
+        
+        XCTAssertEqual(reviewBinding.wrappedValue, "")
+    }
+    
+    func testReviewSaving() {
+        let movieID = 123
+        let reviewBinding = Binding.constant("Great movie!")
+        let view = ReviewView(review: reviewBinding, movieID: movieID)
+        
+        view.saveReview()
+        let savedReview = UserDefaults.standard.string(forKey: "\(movieID)-review")
+        XCTAssertEqual(savedReview, "Great movie!")
+    }
+    
+    func testReviewViewInitialState() {
+        let reviewBinding = Binding.constant("")
+        let view = ReviewView(review: reviewBinding, movieID: 1)
+
+        XCTAssertEqual(reviewBinding.wrappedValue, "", "Initial review text should be empty.")
+    }
+
+    func testSaveEmptyReview() {
+        let reviewBinding = Binding.constant("")
+        let view = ReviewView(review: reviewBinding, movieID: 1)
+
+        view.saveReview()
+        let savedReview = UserDefaults.standard.string(forKey: "1-review")
+        XCTAssertEqual(savedReview, "", "Saving an empty review should store an empty string.")
+    }
+
+}
+
+
+class MovieDetailViewTests1: XCTestCase {
+    
+    var movie: Movie!
+    var favoriteMoviesManager: FavoriteMoviesManager!
+    
+    override func setUp() {
+        super.setUp()
+        movie = Movie(
+            id: 1,
+            title: "Test Movie",
+            releaseDate: "2024-01-01",
+            overview: "This is a test movie.",
+            posterPath: "https://example.com/poster.jpg",
+            trailerURL: nil
+        )
+        favoriteMoviesManager = FavoriteMoviesManager()
+    }
+
+    func testMovieDetailUIElements() {
+        let detailView = MovieDetailView(movie: movie, favoriteMoviesManager: self.favoriteMoviesManager)
+
+        XCTAssertEqual(detailView.movie.title, "Test Movie", "Movie title should be displayed correctly.")
+        XCTAssertEqual(detailView.movie.overview, "This is a test movie.", "Movie overview should be displayed correctly.")
+    }
+    
+    func testDateFormatting() {
+        let detailView = MovieDetailView(movie: movie)
+        let formattedDate = detailView.formatDate("2024-01-01")
+        XCTAssertEqual(formattedDate, "1. Januar 2024")
+    }
+}

@@ -29,20 +29,6 @@
 			);
 			target = CCFB71EA2CE74EB800227CD0 /* iosFilmApp */;
 		};
-		CC5688C52CF5241C00EAA900 /* Exceptions for "iosFilmAppTests" folder in "iosFilmApp" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				iosFilmAppTests.xctestplan,
-			);
-			target = CCFB71EA2CE74EB800227CD0 /* iosFilmApp */;
-		};
-		CC5688C62CF5241C00EAA900 /* Exceptions for "iosFilmAppTests" folder in "iosFilmAppTests" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				iosFilmAppTests.xctestplan,
-			);
-			target = CC5688AD2CF502AA00EAA900 /* iosFilmAppTests */;
-		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -58,10 +44,6 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CC5688AF2CF502AA00EAA900 /* iosFilmAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				CC5688C52CF5241C00EAA900 /* Exceptions for "iosFilmAppTests" folder in "iosFilmApp" target */,
-				CC5688C62CF5241C00EAA900 /* Exceptions for "iosFilmAppTests" folder in "iosFilmAppTests" target */,
-			);
 			path = iosFilmAppTests;
 			sourceTree = "<group>";
 		};
