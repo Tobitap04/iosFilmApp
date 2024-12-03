@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		CC6653782CFF7E580059B6F8 /* TestPlan.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = CC6653732CFF7E580059B6F8 /* TestPlan.xctestplan */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		CC5688B22CF502AA00EAA900 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -18,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		CC5688AE2CF502AA00EAA900 /* iosFilmAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosFilmAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC6653732CFF7E580059B6F8 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		CCFB71EB2CE74EB800227CD0 /* iosFilmApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosFilmApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -82,6 +87,7 @@
 				CCFB71ED2CE74EB800227CD0 /* iosFilmApp */,
 				CC5688AF2CF502AA00EAA900 /* iosFilmAppTests */,
 				CCFB71EC2CE74EB800227CD0 /* Products */,
+				CC6653732CFF7E580059B6F8 /* TestPlan.xctestplan */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,6 +193,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC6653782CFF7E580059B6F8 /* TestPlan.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
